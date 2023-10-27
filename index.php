@@ -3,37 +3,37 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bootstrap demo</title>
+    <title>Login Area</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
   </head>
-  <body>
+  <body style="background-color:black;">
     <div class="container">
         <div class="row d-flex align-items-center justify-content-center" style="height: 100vh; width:100%">
             <div class="col-md-6">
                 <div class="card border-0 shadow rounded">
-                    <div class="card-header">
-                        <strong>Login</strong>
-                    </div>
                     <div class="card-body">
-                        <div class="row">
-                        <form action="" id="loginForm">
-                            <input 
-                                class="form-control"
-                                type="text"
-                                id="username"
-                                placeholder="Username"
-                                autofocus
-                                autocomplete="off">
-                            <input 
-                                class="form-control mt-3"
-                                type="password"
-                                id="password"
-                                placeholder="Password"
-                                autofocus
-                                autocomplete="off">
-                            <button type="button" class="btn btn-primary mt-3" onclick="login()">Login</button>
-                            <a href="#" class="btn btn-outline-secondary mt-3" onclick="switchForms('registerForm')">Register</a>
-                        </form>
+                        <div   div class="row">
+                            <form action="actionLogin.php" method="post" id="loginForm">
+                                <div class="card-header mb-3">
+                                    <strong>Login</strong>
+                                </div>
+                                <input 
+                                    class="form-control"
+                                    type="text"
+                                    name="username"
+                                    placeholder="Username"
+                                    autofocus
+                                    autocomplete="off">
+                                <input 
+                                    class="form-control mt-3"
+                                    type="password"
+                                    name="password"
+                                    placeholder="Password"
+                                    autocomplete="off">
+                                <button type="submit" class="btn btn-primary mt-3"><i class="bi bi-box-arrow-in-right"></i> Login</button>
+                                <a href="#" class="btn btn-outline-secondary mt-3" onclick="switchForms('registerForm')">Register</a>
+                            </form>
                         <form action="registrasi.php" method="post" id="registerForm" style="display: none;">
                             <div class="card-header mb-3">
                                 <strong>Registrasi Akun Baru</strong>
@@ -65,45 +65,8 @@
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <script>
-        var users = [];
-
-        function login() {
-            var username = document.getElementById("username").value;
-            var password = document.getElementById("password").value;
-
-            var userFound = false;
-
-            for(var i = 0; i < users.length; i++ ){
-                if(users[i].username === username && users[i].password === password){
-                    userFound = true;
-                    break;
-                }
-            }
-            if(userFound) {
-                console.log("Login Berhasil");
-                document.getElementById("loginForm").reset();
-
-                window.location.href ="dashboard.html";
-            } else {
-                console.log("Username dan Password salah...")
-            }
-        }
-        function register() {
-            var username = document.getElementById("regUsername").value;
-            var password = document.getElementById("regPassword").value;
-            
-            if (username && password) {
-                // Tambahkan pengguna ke array
-                users.push({ username: username, password: password });
-                console.log("Pengguna berhasil terdaftar");
-                document.getElementById("registerForm").reset();
-                switchForms(); // Beralih kembali ke formulir login
-            } else {
-                console.log("Form harus terisi semua");
-            }
-        }
-
         function switchForms() {
             var loginForm = document.getElementById("loginForm");
             var registerForm = document.getElementById("registerForm");
@@ -123,11 +86,13 @@
                 title: 'Registrasi Berhasil',
                 text: 'Anda telah berhasil mendaftar',
                 icon: 'success',
-                confirmButtonText: "Ok",
+                confirmButtonText: 'Ok',
             }).then((result) => {
-                if(result.isConfirmed){
-                    window.location 
-                }
+               if(result.isConfirmed){
+                window.location.href = 'index.php';
+               }     
+            }).finally(() => {
+                switchForms('#loginForm');
             });
         }
     </script>
